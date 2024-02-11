@@ -19,3 +19,14 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+from django.urls import path
+from .views import TrainModelView, PredictModelView, SaveModelView
+
+
+from django.urls import include, path
+
+urlpatterns = [
+    path('train/', TrainModelView.as_view(), name='train'),
+    path('save/', SaveModelView.as_view(), name='save'),
+    path('predict/', PredictModelView.as_view(), name='predict'),
+]
