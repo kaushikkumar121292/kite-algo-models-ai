@@ -1,3 +1,5 @@
+import os
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import model_dnn
@@ -25,8 +27,15 @@ class TrainModelView(APIView):
 class SaveModelView(APIView):
     def get(self, request, *args, **kwargs):
         if TrainModelView.model is not None:
-            save_path = "myproject/myapp/model_dnn_folder"
-            model_dnn.save_model(TrainModelView.model, save_path)  # Adjust as necessary based on your save_model function's implementation
+            save_dir = "myproject/myapp/model_dnn_folder"
+            save_filename = "model.h5"
+            ave_path = os.path.join(save_dir, save_filename)
+
+            # Create the directory if it does not exist
+            os.makedirs(save_dir, exist_ok=True)
+
+            # Save the model
+            model_dnn.save_model(TrainModelView.model, save_path)
             return Response({"message": "Model saved successfully"})
         else:
             return Response({"message": "No model available to save."}, status=400)
