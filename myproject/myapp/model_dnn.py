@@ -6,7 +6,6 @@ import tensorflow as tf
 from imblearn.under_sampling import TomekLinks
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tabulate import tabulate  # Import tabulate library
 from tensorflow.keras.callbacks import EarlyStopping  # Import EarlyStopping callback
 from tensorflow.keras.preprocessing.sequence import pad_sequences
