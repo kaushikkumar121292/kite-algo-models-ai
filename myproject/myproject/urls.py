@@ -1,6 +1,5 @@
 from django.urls import include, path
 
 urlpatterns = [
-    # ... other url patterns
-    path('api/', include('myproject.myapp.urls')),
+    path('api/', include('myproject.myapp.urls')),  # Adjust 'myapp' based on your app's name
 ]
