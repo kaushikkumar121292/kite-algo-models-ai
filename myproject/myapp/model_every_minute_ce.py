@@ -133,6 +133,7 @@ def predict_unseen(raw_unseen_data):
 
     # Format and return the prediction results
     predictions_list = predictions.flatten().tolist()
+    print(predictions_list)
     return {"predictions": predictions_list}
 
 
