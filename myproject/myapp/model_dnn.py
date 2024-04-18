@@ -9,6 +9,16 @@ from sklearn.preprocessing import StandardScaler
 from tabulate import tabulate  # Import tabulate library
 from tensorflow.keras.callbacks import EarlyStopping  # Import EarlyStopping callback
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import requests
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from imblearn.under_sampling import TomekLinks
+from tabulate import tabulate
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
+from tensorflow.keras.callbacks import EarlyStopping
 
 
 
@@ -220,16 +230,17 @@ def start_training():
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_resampled)  # Use resampled data for training
     X_test = scaler.transform(X_test)
-    model_dnn = tf.keras.Sequential([
-        # Corrected the input shape definition
-        tf.keras.layers.Input(shape=(X_train.shape[1],)),  # Note the comma to make it a tuple
-        tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dropout(0.5),  # Adding dropout for regularization
-        tf.keras.layers.Dense(64, activation='relu'),
-        tf.keras.layers.Dropout(0.3),
-        tf.keras.layers.Dense(32, activation='relu'),
-        tf.keras.layers.Dropout(0.2),
-        tf.keras.layers.Dense(1, activation='sigmoid')  # Binary classification, so use 'sigmoid' activation
+    model_dnn = Sequential([
+        Dense(1024, activation='relu', input_shape=(X_resampled.shape[1],)),
+        BatchNormalization(),
+        Dropout(0.3),
+        Dense(512, activation='relu'),
+        BatchNormalization(),
+        Dropout(0.3),
+        Dense(256, activation='relu'),
+        Dropout(0.2),
+        Dense(128, activation='relu'),
+        Dense(1, activation='sigmoid')
     ])
     early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
     # Compile the model

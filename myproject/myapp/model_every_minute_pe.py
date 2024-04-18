@@ -109,7 +109,7 @@ def predict_unseen(raw_unseen_data):
     features_list = []
     for record in raw_unseen_data:
         features = [
-            record['indiaVix'], record['theta'], record['oi_change'], record['max_oi'], record['ltp_change'],
+            record['indiaVix'],record['entry'], record['theta'], record['oi_change'], record['max_oi'], record['ltp_change'],
             record['delta'], record['gamma'], record['vega'], record['iv'], record['last_price'], record['oi'],
             record['volume'], record['atm_iv'], record['future_price'], record['underlying_price']
         ]
@@ -125,7 +125,7 @@ def predict_unseen(raw_unseen_data):
         unseen_data_np)  # For example purposes, this should be scaler.transform(unseen_data_np) in practice
 
     # Load the trained model
-    model = tf.keras.models.load_model('model_every_minute_pe')
+    model = tf.keras.models.load_model('model_every_minute_ce')
 
     # Make predictions
     predictions_proba = model.predict(unseen_scaled)
@@ -135,3 +135,4 @@ def predict_unseen(raw_unseen_data):
     predictions_list = predictions.flatten().tolist()
     print(predictions_list)
     return {"predictions": predictions_list}
+train_model()
