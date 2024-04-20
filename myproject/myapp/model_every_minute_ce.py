@@ -20,7 +20,7 @@ def train_model():
     features_list = []
     target_list = []
     for record in data:
-        features = [record['indiaVix'], record['theta'], record['oi_change'], record['max_oi'], record['ltp_change'],
+        features = [record['indiaVix'], record['entry'], record['theta'], record['oi_change'], record['max_oi'], record['ltp_change'],
                     record['delta'], record['gamma'], record['vega'], record['iv'], record['last_price'], record['oi'],
                     record['volume'], record['atm_iv'], record['future_price'], record['underlying_price']]
         features_list.append(features)
@@ -108,11 +108,9 @@ def predict_unseen(raw_unseen_data):
     # Feature extraction from raw unseen data
     features_list = []
     for record in raw_unseen_data:
-        features = [
-            record['indiaVix'],record['entry'], record['theta'], record['oi_change'], record['max_oi'], record['ltp_change'],
-            record['delta'], record['gamma'], record['vega'], record['iv'], record['last_price'], record['oi'],
-            record['volume'], record['atm_iv'], record['future_price'], record['underlying_price']
-        ]
+        features = [record['indiaVix'], record['entry'], record['theta'], record['oi_change'], record['max_oi'],record['ltp_change'],
+                    record['delta'], record['gamma'], record['vega'], record['iv'], record['last_price'], record['oi'],
+                    record['volume'], record['atm_iv'], record['future_price'], record['underlying_price']]
         features_list.append(features)
 
     # Convert to numpy array for scaling
