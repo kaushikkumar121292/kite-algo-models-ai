@@ -86,7 +86,7 @@ def train_model():
 
 
     # Save the model for later use
-    model.save('model_every_minute_ce')
+    model.save('model_every_minute_ce.keras')
 
     # Format the accuracy as a percentage
     accuracy_percent = f"{accuracy * 100:.2f}%"
@@ -123,7 +123,7 @@ def predict_unseen(raw_unseen_data):
         unseen_data_np)  # For example purposes, this should be scaler.transform(unseen_data_np) in practice
 
     # Load the trained model
-    model = tf.keras.models.load_model('model_every_minute_ce')
+    model = tf.keras.models.load_model('model_every_minute_ce.keras')
 
     # Make predictions
     predictions_proba = model.predict(unseen_scaled)
